@@ -17,8 +17,9 @@ export const getCandies = candies => ({
 export const getCandiesThunk = () => {
   return async dispatch => {
     try {
-      const { allCandiesData } = await axios.get('/api/candies');
-      dispatch(getCandies(allCandiesData));
+      const { data } = await axios.get('/api/candies');
+      console.log('data is, ', data);
+      dispatch(getCandies(data));
     } catch (err) {
       console.log('ERR while fetching candies', err);
     }
@@ -28,7 +29,7 @@ export const getCandiesThunk = () => {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CANDIES:
-      return { candies: action.candies };
+      return { ...state, candies: action.candies };
 
     default:
       return state;

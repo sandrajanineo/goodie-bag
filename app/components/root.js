@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getCandiesThunk } from '../reducers/index';
+import AllCandy from './AllCandy';
+import { HashRouter, Route, Link } from 'react-router-dom';
 
 const Root = () => {
   return (
@@ -9,22 +11,12 @@ const Root = () => {
       <main>
         <h1>Welcome to the Goodie Bag!</h1>
         <p>What a nice home page for your goodies!</p>
+        <HashRouter>
+          <Route path="/candies" component={AllCandy} />
+        </HashRouter>
       </main>
     </div>
   );
 };
-
-// const mapState = state => ({
-//   candies: state.candies,
-// });
-
-const mapDispatch = dispatch => ({
-  getCandiesThunk: () => dispatch(getCandiesThunk()),
-});
-
-connect(
-  null,
-  mapDispatch
-)(Root);
 
 export default Root;
